@@ -8,7 +8,8 @@ import javax.validation.constraints.*;
 public class MeasurementDTO {
     @Min(-100)
     @Max(100) //message = "Temperature got to be between -100 and 100"
-    private double temperature;
+    @NotNull
+    private Double temperature;
     @NotNull(message = "Rain is unknown")
     private Boolean rain;
     @NotNull(message = "Sensor is empty")
