@@ -19,6 +19,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static cz.kzrv.WeatherSpringProject.util.ErrorsUtil.returnErrorsToClient;
+
 @RestController
 @RequestMapping("/measurement")
 public class MeasurementController {
@@ -54,16 +56,6 @@ public class MeasurementController {
     }
     private MeasurementDTO convert(Measurement measurement){
         return modelMapper.map(measurement,MeasurementDTO.class);
-    }
-    private String returnErrorsToClient(BindingResult bindingResult) {
-        StringBuilder errorMsg = new StringBuilder();
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            errorMsg.append(error.getField())
-                    .append(" - ").append(error.getDefaultMessage() == null ? error.getCode() : error.getDefaultMessage())
-                    .append(";");
-        }
-        return errorMsg.toString();
     }
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> exception(MeasurementNotAddedException e){

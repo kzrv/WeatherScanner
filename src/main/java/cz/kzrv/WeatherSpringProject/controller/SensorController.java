@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
-import java.util.List;
+
+import static cz.kzrv.WeatherSpringProject.util.ErrorsUtil.returnErrorsToClient;
 
 @RestController
 @RequestMapping("/sensor")
@@ -55,17 +55,6 @@ public class SensorController {
 
     private Sensor convert(SensorDTO sensorDTO){
         return modelMapper.map(sensorDTO,Sensor.class);
-    }
-
-    private String returnErrorsToClient(BindingResult bindingResult) {
-        StringBuilder errorMsg = new StringBuilder();
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            errorMsg.append(error.getField())
-                    .append(" - ").append(error.getDefaultMessage() == null ? error.getCode() : error.getDefaultMessage())
-                    .append(";");
-        }
-        return errorMsg.toString();
     }
 
 }
