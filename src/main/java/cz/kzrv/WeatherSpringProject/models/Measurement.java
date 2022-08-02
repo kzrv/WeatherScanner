@@ -1,6 +1,7 @@
 package cz.kzrv.WeatherSpringProject.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -9,10 +10,13 @@ public class Measurement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull
     @Column(name = "temperature")
-    private double temperature;
+    private Double temperature;
+    @NotNull
     @Column(name="is_rain")
     private Boolean rain;
+    @NotNull
     @Column(name = "adding_time")
     private Date addingDate;
 
